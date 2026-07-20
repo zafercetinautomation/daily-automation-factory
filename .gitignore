@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+.venv/
+build/
+dist/
+.pytest_cache/
+history/*.json
+!history/.gitkeep
+
