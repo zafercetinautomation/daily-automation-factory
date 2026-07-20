@@ -1,0 +1,98 @@
+name: Günlük otomasyon projesini yayımla
+
+on:
+  schedule:
+    - cron: "15 9 * * *"
+      timezone: "Europe/Istanbul"
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Herkese açık depo oluştur (kapalı = kuru çalıştırma)"
+        required: true
+        type: boolean
+        default: false
+      date:
+        description: "İsteğe bağlı tarih (YYYY-AA-GG)"
+        required: false
+        type: string
+
+concurrency:
+  group: daily-automation-publisher
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  verify-factory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Yayıncıyı test et
+        run: python -m unittest discover -s tests -v
+
+  publish:
+    needs: verify-factory
+    if: >-
+      vars.DAILY_PUBLISH_ENABLED == 'true' ||
+      (github.event_name == 'workflow_dispatch' && inputs.publish)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      GH_PROFILE_TOKEN: ${{ secrets.GH_PROFILE_TOKEN }}
+      OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+      DATE_OVERRIDE: ${{ inputs.date }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Projeyi üret ve yayımla
+        run: |
+          args=(--publish)
+          if [[ -n "$DATE_OVERRIDE" ]]; then
+            args+=(--date "$DATE_OVERRIDE")
+          fi
+          python scripts/publish_daily.py "${args[@]}"
+      - name: Yayını kaydet
+        run: |
+          git config user.name "daily-automation-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f history/*.json
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "chore: record daily project"
+          git push
+
+  dry-run:
+    needs: verify-factory
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      !inputs.publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      DATE_OVERRIDE: ${{ inputs.date }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Yayımlamadan örnek oluştur
+        run: |
+          args=(--dry-run)
+          if [[ -n "$DATE_OVERRIDE" ]]; then
+            args+=(--date "$DATE_OVERRIDE")
+          fi
+          python scripts/publish_daily.py "${args[@]}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gunluk-otomasyon-kuru-calistirma
+          path: build/
+          if-no-files-found: error
