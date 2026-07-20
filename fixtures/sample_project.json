@@ -1,0 +1,39 @@
+{
+  "slug": "{{SLUG}}",
+  "title": "{{TITLE}}",
+  "description": "{{DESCRIPTION}}",
+  "files": [
+    {
+      "path": "README.md",
+      "content": "# {{TITLE}}\n\nGünlük Otomasyon Proje Fabrikası tarafından oluşturulan, önce simülasyonda çalışan küçük bir Beckhoff TwinCAT 3 eğitim projesi önizlemesi.\n\n> {{DESCRIPTION}}\n\n## Hızlı başlangıç\n\n```bash\npython3 src/main.py examples/input.txt\npython3 -m unittest discover -s tests -v\n```\n\n`plc/MAIN.st` dosyasını TwinCAT 3 Standard PLC Project içindeki MAIN programına aktarabilirsiniz. Beckhoff'un resmî başlangıç rehberi: https://infosys.beckhoff.com/content/1033/tc3_system/2525041803.html\n\n## Ne yapar?\n\nKuru çalıştırma örneği depo yapısını gösterir; gerçek günlük yayıncı, proje özetine özel Structured Text kodu ve eşdeğer Python simülasyonu oluşturur.\n\n## Güvenlik ve sınırlamalar\n\nBu proje eğitim ve simülasyon amaçlıdır. Gerçek makinede kullanmadan önce risk analizi, emniyet doğrulaması ve yetkin uzman incelemesi gerekir. Standart PLC kodu sertifikalı emniyet fonksiyonu değildir.\n\n## Lisans\n\nMIT\n"
+    },
+    {
+      "path": "LICENSE",
+      "content": "MIT License\n\nCopyright (c) 2026 Daily AI Automation Lab\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.\n"
+    },
+    {
+      "path": "pyproject.toml",
+      "content": "[project]\nname = \"{{SLUG}}\"\nversion = \"0.1.0\"\ndescription = \"TwinCAT PLC eğitim projesi ve Python simülasyonu\"\nrequires-python = \">=3.11\"\n\n[tool.unittest]\nstart-directory = \"tests\"\n"
+    },
+    {
+      "path": "src/main.py",
+      "content": "\"\"\"Sembolik PLC girişleriyle basit mühürleme mantığını simüle et.\"\"\"\n\nfrom __future__ import annotations\n\nimport argparse\nimport json\nfrom dataclasses import dataclass\nfrom pathlib import Path\n\n\n@dataclass\nclass MotorLatch:\n    \"\"\"Start/stop girişleriyle tutulan çıkış durumunu temsil eder.\"\"\"\n\n    output: bool = False\n\n    def step(self, *, start: bool, stop: bool) -> bool:\n        if stop:\n            self.output = False\n        elif start:\n            self.output = True\n        return self.output\n\n\ndef simulate(events: list[dict[str, bool]]) -> list[bool]:\n    motor = MotorLatch()\n    return [motor.step(start=item[\"start\"], stop=item[\"stop\"]) for item in events]\n\n\ndef main() -> None:\n    parser = argparse.ArgumentParser(description=\"PLC mantığını donanımsız simüle et\")\n    parser.add_argument(\"input\", type=Path)\n    args = parser.parse_args()\n    events = json.loads(args.input.read_text(encoding=\"utf-8\"))\n    print(json.dumps({\"cikislar\": simulate(events)}, ensure_ascii=False, indent=2))\n\n\nif __name__ == \"__main__\":\n    main()\n"
+    },
+    {
+      "path": "tests/test_main.py",
+      "content": "\"\"\"Mühürleme mantığı simülasyon testleri.\"\"\"\n\nimport sys\nimport unittest\nfrom pathlib import Path\n\nsys.path.insert(0, str(Path(__file__).resolve().parents[1] / \"src\"))\n\nfrom main import simulate\n\n\nclass MotorLatchTests(unittest.TestCase):\n    def test_start_latches_until_stop(self) -> None:\n        events = [\n            {\"start\": True, \"stop\": False},\n            {\"start\": False, \"stop\": False},\n            {\"start\": False, \"stop\": True},\n        ]\n        self.assertEqual(simulate(events), [True, True, False])\n\n    def test_stop_has_priority(self) -> None:\n        self.assertEqual(simulate([{\"start\": True, \"stop\": True}]), [False])\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+    },
+    {
+      "path": "examples/input.txt",
+      "content": "[\n  {\"start\": true, \"stop\": false},\n  {\"start\": false, \"stop\": false},\n  {\"start\": false, \"stop\": true}\n]\n"
+    },
+    {
+      "path": "plc/MAIN.st",
+      "content": "PROGRAM MAIN\nVAR\n    bStart       : BOOL;\n    bStop        : BOOL;\n    bOutput      : BOOL;\nEND_VAR\n\n(* Eğitim örneği: sembolik girişlerle basit mühürleme mantığı. *)\nIF bStop THEN\n    bOutput := FALSE;\nELSIF bStart THEN\n    bOutput := TRUE;\nEND_IF\n\nEND_PROGRAM\n"
+    },
+    {
+      "path": ".gitattributes",
+      "content": "*.st -linguist-detectable\n"
+    }
+  ]
+}
