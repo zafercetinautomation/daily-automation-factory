@@ -1,0 +1,182 @@
+[
+  {
+    "slug": "twincat-traffic-light",
+    "title": "TwinCAT Trafik Lambası",
+    "brief": "TON zamanlayıcıları ve durum makinesi kullanarak araç ve yaya ışıklarını simüle eden başlangıç düzeyi PLC projesi.",
+    "category": "beckhoff-twincat"
+  },
+  {
+    "slug": "conveyor-sequence",
+    "title": "Konveyör Sıralı Çalışma",
+    "brief": "Başlatma, durdurma, sensör algılama ve ürün sayma adımlarını sembolik I/O ile öğreten konveyör simülasyonu.",
+    "category": "sequence-control"
+  },
+  {
+    "slug": "motor-start-stop-interlock",
+    "title": "Motor Başlatma ve Kilitleme",
+    "brief": "Mühürleme devresi, termik arıza girişi ve yeniden başlatma kilidi kavramlarını gösteren motor kontrol örneği.",
+    "category": "motor-control"
+  },
+  {
+    "slug": "twincat-timer-lab",
+    "title": "TwinCAT Zamanlayıcı Laboratuvarı",
+    "brief": "TON, TOF ve TP zamanlayıcılarını aynı senaryoda karşılaştıran, dalga biçimi benzeri çıktı üreten eğitim projesi.",
+    "category": "iec61131"
+  },
+  {
+    "slug": "tank-level-control",
+    "title": "Tank Seviye Kontrolü",
+    "brief": "Alt ve üst seviye sensörleriyle dolum vanasını yöneten, taşma ve kuru çalışma kilitlemeleri içeren simülasyon.",
+    "category": "process-control"
+  },
+  {
+    "slug": "temperature-hysteresis",
+    "title": "Sıcaklık Histerezis Kontrolü",
+    "brief": "Isıtıcı çıkışında sık açma kapamayı önleyen ayarlanabilir histerezis mantığını öğreten TwinCAT projesi.",
+    "category": "process-control"
+  },
+  {
+    "slug": "packaging-counter",
+    "title": "Paketleme Ürün Sayacı",
+    "brief": "Yükselen kenar algılama, CTU sayacı, koli hedefi ve sayaç sıfırlama adımlarını gösteren paketleme örneği.",
+    "category": "packaging"
+  },
+  {
+    "slug": "sensor-debounce",
+    "title": "Sensör Titreşim Filtreleme",
+    "brief": "Mekanik sensör titreşimini zaman doğrulamasıyla filtreleyen ve yanlış sayımları önleyen PLC fonksiyon örneği.",
+    "category": "signal-processing"
+  },
+  {
+    "slug": "plc-state-machine",
+    "title": "PLC Durum Makinesi",
+    "brief": "Bekleme, hazırlık, çalışma, duruş ve arıza durumlarını CASE yapısıyla yöneten yeniden kullanılabilir şablon.",
+    "category": "software-design"
+  },
+  {
+    "slug": "analog-signal-scaling",
+    "title": "Analog Sinyal Ölçekleme",
+    "brief": "Ham analog değeri mühendislik birimine dönüştüren, sınırlandırma ve sensör kopukluğu kontrolü içeren örnek.",
+    "category": "analog-io"
+  },
+  {
+    "slug": "alarm-manager",
+    "title": "PLC Alarm Yöneticisi",
+    "brief": "Alarm etkinleştirme, onay, kilitleme ve ilk gelen alarm kaydı mantığını öğreten Türkçe eğitim projesi.",
+    "category": "alarms"
+  },
+  {
+    "slug": "duty-standby-pumps",
+    "title": "Sıralı Pompa Değişimi",
+    "brief": "İki pompayı çalışma süresine göre sırayla devreye alan ve arızalı pompayı atlayan görev-yedek simülasyonu.",
+    "category": "process-control"
+  },
+  {
+    "slug": "garage-door-control",
+    "title": "Otomatik Garaj Kapısı",
+    "brief": "Açma-kapama, limit sensörleri, engel algılama ve zaman aşımı durumlarını yöneten durum makinesi örneği.",
+    "category": "sequence-control"
+  },
+  {
+    "slug": "elevator-simulator",
+    "title": "Üç Katlı Asansör Simülatörü",
+    "brief": "Kat çağrıları, yön seçimi, kapı zamanı ve hareket kilitlemesini öğreten donanımsız PLC simülasyonu.",
+    "category": "sequence-control"
+  },
+  {
+    "slug": "sorting-conveyor",
+    "title": "Ürün Ayırma Konveyörü",
+    "brief": "Ürün tipi girişine göre yönlendirme pistonunu zamanlayan, kuyruk ve sensör hatasını gösteren ayırma sistemi.",
+    "category": "material-handling"
+  },
+  {
+    "slug": "recipe-management",
+    "title": "Basit Reçete Yönetimi",
+    "brief": "Ürün reçetelerini yapı tipiyle saklayan, seçim doğrulaması ve çalışma sırasında değişiklik kilidi içeren örnek.",
+    "category": "data-structures"
+  },
+  {
+    "slug": "hmi-variable-design",
+    "title": "HMI Değişken Tasarımı",
+    "brief": "TwinCAT HMI ekranı için durum, komut, alarm ve ayar değişkenlerini düzenli adlandırmayı öğreten PLC projesi.",
+    "category": "hmi"
+  },
+  {
+    "slug": "ethercat-diagnostic-simulator",
+    "title": "EtherCAT Tanılama Simülatörü",
+    "brief": "Slave durumlarını örnek verilerle izleyen, iletişim kaybı ve toparlanma senaryolarını raporlayan eğitim aracı.",
+    "category": "ethercat"
+  },
+  {
+    "slug": "ads-data-logger",
+    "title": "ADS Veri Kaydedici Tasarımı",
+    "brief": "PLC değişkenlerini sembolik olarak veri toplama katmanına hazırlayan ve Python ile örnek kayıt akışı sunan proje.",
+    "category": "ads"
+  },
+  {
+    "slug": "pid-temperature-simulator",
+    "title": "PID Sıcaklık Simülatörü",
+    "brief": "Basitleştirilmiş bir proses modeli üzerinden P, I ve D etkilerini görselleştiren eğitim amaçlı kontrol simülasyonu.",
+    "category": "control-theory"
+  },
+  {
+    "slug": "oee-calculator",
+    "title": "OEE Hesaplayıcı",
+    "brief": "Kullanılabilirlik, performans ve kalite verilerinden OEE hesaplayan PLC veri modeli ve Python raporu.",
+    "category": "production-analytics"
+  },
+  {
+    "slug": "energy-monitor",
+    "title": "Enerji Tüketim İzleyici",
+    "brief": "Örnek güç ölçümlerinden vardiya tüketimi, tepe değer ve eşik alarmı üreten otomasyon simülasyonu.",
+    "category": "energy"
+  },
+  {
+    "slug": "shift-production-report",
+    "title": "Vardiya Üretim Raporu",
+    "brief": "Ürün sayısı, duruş süresi, hata ve hurda verilerini vardiya sonunda Türkçe özetleyen PLC/Python projesi.",
+    "category": "reporting"
+  },
+  {
+    "slug": "modbus-register-map",
+    "title": "Modbus Register Haritası",
+    "brief": "Sembolik PLC değişkenlerini register tablosuna eşleyen, veri tipi ve byte sırası hatalarını açıklayan eğitim örneği.",
+    "category": "industrial-communication"
+  },
+  {
+    "slug": "pallet-tracking",
+    "title": "Palet Takip Simülatörü",
+    "brief": "İstasyonlar arasında palet kimliği ve işlem durumunu taşıyan basit takip mantığını gösteren üretim hattı projesi.",
+    "category": "material-handling"
+  },
+  {
+    "slug": "safety-interlock-concepts",
+    "title": "Emniyet Kilitleme Kavramları",
+    "brief": "Acil duruş, koruyucu kapı ve reset koşullarını yalnızca simülasyon düzeyinde açıklayan güvenlik odaklı eğitim projesi.",
+    "category": "safety-education"
+  },
+  {
+    "slug": "machine-mode-manager",
+    "title": "Makine Mod Yöneticisi",
+    "brief": "Manuel, otomatik, bakım ve arıza modları arasında kontrollü geçiş kurallarını öğreten TwinCAT durum makinesi.",
+    "category": "software-design"
+  },
+  {
+    "slug": "predictive-maintenance-demo",
+    "title": "Kestirimci Bakım Eğitim Demosu",
+    "brief": "Titreşim ve sıcaklık örneklerinden açıklanabilir sağlık puanı üreten PLC veri hazırlama ve Python analiz örneği.",
+    "category": "ai-automation"
+  },
+  {
+    "slug": "digital-twin-conveyor",
+    "title": "Konveyör Dijital İkiz Simülasyonu",
+    "brief": "PLC durumlarıyla aynı geçişleri kullanan Python modeli üzerinden çevrim süresi ve sensör senaryolarını deneyen proje.",
+    "category": "digital-twin"
+  },
+  {
+    "slug": "mini-production-line",
+    "title": "Mini Üretim Hattı Bitirme Projesi",
+    "brief": "Besleme, işleme, kalite kontrol, ayırma ve raporlama adımlarını modüler Structured Text bloklarıyla birleştiren öğrenci projesi.",
+    "category": "capstone"
+  }
+]
